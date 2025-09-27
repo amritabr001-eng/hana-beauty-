@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Hana Beauty — Inclusive Skincare & Makeup</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Hana Beauty — modern, inclusive skincare and makeup for women 18–35. Clean formulas, inclusive shades, everyday radiance." />
+  <meta name="keywords" content="Hana Beauty, makeup, skincare, sunscreen, moisturizer, foundation, lipstick, inclusive beauty">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#FBEFF6">
+
+  <!-- Minimal JSON-LD (sample) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {"@type":"Organization","name":"Hana Beauty","url":"https://example.com"},
+      {"@type":"WebSite","url":"https://example.com","name":"Hana Beauty"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{
+      --red:#E11D48;
+      --pink:#FFC9DE;
+      --lav:#E9D8FD;
+      --muted:#6B6B6B;
+      --bg:#FFFFFF;
+      --card:#FFF7FB;
+      --radius:14px;
+      --maxw:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+      color:#222;
+      background:linear-gradient(180deg,var(--bg),#fff 60%);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:16px}
+    header{position:sticky;top:0;z-index:60;background:linear-gradient(90deg,var(--pink),#fff 60%);backdrop-filter:blur(6px);border-bottom:1px solid rgba(0,0,0,0.04)}
+    .topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--lav));display:flex;align-items:center;justify-content:center;font-weight:700;font-family:"Playfair Display",serif;color:#8b2b3f}
+    .brand h1{margin:0;font-family:"Playfair Display",serif;font-size:18px;color:#8b2b3f}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
+
+    /* Hero */
+    .hero{display:flex;flex-direction:column;gap:12px;padding:18px;background:#fff;border-radius:18px;margin-top:12px;box-shadow:0 10px 30px rgba(225,29,72,0.06)}
+    @media(min-width:860px){ .hero{flex-direction:row;align-items:center} }
+    .hero-left{flex:1}
+    .eyebrow{font-size:12px;text-transform:uppercase;color:var(--muted);letter-spacing:1px}
+    .headline{font-family:"Playfair Display",serif;font-size:22px;margin:8px 0;color:#3a2b3e}
+    .sub{color:#555;font-size:14px}
+    .cta-row{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap}
+    .btn{padding:10px 14px;border-radius:999px;font-weight:600;font-size:14px;border:none;cursor:pointer}
+    .btn-primary{background:var(--red);color:white;box-shadow:0 12px 36px rgba(225,29,72,0.10)}
+    .btn-ghost{background:transparent;border:1px solid rgba(225,29,72,0.12);color:var(--red)}
+    .hero-right img{width:120px;height:120px;object-fit:cover;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.06)}
+
+    /* Controls */
+    .controls{display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap}
+    .search{flex:1;display:flex;gap:8px}
+    .search input{flex:1;padding:12px 14px;border-radius:12px;border:1px solid #eee;font-size:14px}
+    .select, .currency {padding:10px;border-radius:10px;border:1px solid #eee;background:#fff}
+
+    /* Products section: LAVENDER background */
+    .products-wrap{margin-top:18px;padding:22px;border-radius:16px;background:linear-gradient(180deg,var(--lav),#F7F0FF);box-shadow:0 10px 30px rgba(227,200,245,0.08)}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    @media(min-width:900px){ .grid{grid-template-columns:repeat(3,1fr)} }
+    .card{background:linear-gradient(180deg,#fff 0%,var(--card) 100%);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:8px;box-shadow:0 8px 20px rgba(0,0,0,0.04)}
+    .card img{width:100%;height:160px;object-fit:cover;border-radius:10px}
+    .title{font-weight:700;font-size:15px;color:#2b1f28}
+    .meta{font-size:13px;color:var(--muted)}
+    .price{font-weight:800;color:var(--red)}
+    .actions{margin-top:auto;display:flex;gap:8px;align-items:center;justify-content:space-between}
+    .small{padding:8px 10px;border-radius:10px;border:1px solid #eee;background:#fff;cursor:pointer}
+
+    /* Cart drawer */
+    .cart-btn{position:fixed;right:16px;top:88px;background:var(--red);color:white;padding:10px;border-radius:12px;box-shadow:0 12px 30px rgba(225,29,72,0.12);border:none;z-index:80}
+    .drawer{position:fixed;right:12px;bottom:12px;background:#fff;border-radius:14px;padding:14px;box-shadow:0 20px 60px rgba(0,0,0,0.12);z-index:80;max-width:380px;width:92%;display:none}
+    .cart-list{max-height:320px;overflow:auto;margin-top:8px;display:flex;flex-direction:column;gap:8px}
+    .cart-item{display:flex;gap:8px;align-items:center}
+    .cart-item img{width:56px;height:56px;object-fit:cover;border-radius:8px}
+    .qty-controls{display:flex;gap:6px;align-items:center}
+
+    /* Modal */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.45);display:flex;align-items:flex-end;justify-content:center;padding:14px;z-index:120}
+    .modal{background:#fff;border-radius:12px;width:100%;max-width:760px;overflow:hidden}
+    .modal-grid{display:grid;grid-template-columns:1fr;gap:10px}
+    @media(min-width:720px){ .modal-grid{grid-template-columns:1fr 1fr} }
+    .modal img{width:100%;height:100%;object-fit:cover}
+
+    /* Reviews */
+    .reviews{background:#fff;padding:12px;border-radius:10px;margin-top:12px}
+    .review-box{background:#fff7fb;padding:10px;border-radius:8px}
+    .stars{color:#FFD166}
+
+    /* Chat */
+    .chat{position:fixed;right:16px;bottom:16px;background:linear-gradient(180deg,var(--lav),var(--pink));padding:10px 12px;border-radius:30px;box-shadow:0 18px 36px rgba(0,0,0,0.12);z-index:100;border:none}
+    .chat-window{position:fixed;right:16px;bottom:76px;width:320px;border-radius:12px;background:#fff;box-shadow:0 20px 50px rgba(0,0,0,0.12);z-index:101;overflow:hidden;display:none}
+    .chat-header{background:linear-gradient(90deg,var(--pink),var(--lav));padding:10px;color:#5b2434;font-weight:700}
+    .chat-body{padding:10px;max-height:220px;overflow:auto}
+    .chat-input{display:flex;gap:8px;padding:10px;border-top:1px solid #eee}
+
+    footer{margin-top:22px;padding:18px;text-align:center;font-size:13px;color:#7b5b6b}
+
+    .muted{color:var(--muted)}
+    .sr-only{position:absolute;left:-9999px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap topbar">
+      <div class="brand" aria-hidden="false">
+        <div class="logo">HB</div>
+        <div>
+          <h1>Hana Beauty</h1>
+          <p class="muted">Minimal • Modern • Inclusive</p>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:10px">
+        <label for="currency" class="sr-only">Currency</label>
+        <select id="currency" class="currency" aria-label="Select currency"></select>
+        <button id="openCartBtn" class="cart-btn" aria-controls="cartDrawer" aria-expanded="false">Cart (<span id="cartCount">0</span>)</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- Hero -->
+    <section class="hero" aria-label="Hero">
+      <div class="hero-left">
+        <div class="eyebrow">Clean formulas · Confident glow</div>
+        <h2 class="headline">Glow everyday — beauty made effortless</h2>
+        <p class="sub">Inclusive skincare and makeup crafted for women 18–35. Clean ingredients, wearable shades, real results.</p>
+
+        <div class="cta-row">
+          <button class="btn btn-primary" onclick="scrollToProducts()">Shop Bestsellers</button>
+          <button class="btn btn-ghost" onclick="alert('Starter kits coming soon!')">Starter Routines</button>
+        </div>
+
+        <div class="controls" style="margin-top:12px">
+          <select id="category" class="select" onchange="applyFilters()">
+            <option value="all">All</option>
+            <option value="skincare">Skincare</option>
+            <option value="makeup">Makeup</option>
+          </select>
+
+          <div style="flex:1" class="search">
+            <input id="search" placeholder="Search products, shades, or benefits" aria-label="Search products" />
+            <button class="small" onclick="applyFilters()">Search</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=60" alt="Hana Beauty lifestyle" />
+      </div>
+    </section>
+
+    <!-- Products in lavender area -->
+    <section class="products-wrap" id="products" aria-label="Products">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <h3 style="margin:0;font-family:'Playfair Display',serif">Featured — Skincare & Makeup</h3>
+        <div class="muted">Showing <span id="productCount">0</span> items</div>
+      </div>
+
+      <div id="grid" class="grid" role="list"></div>
+    </section>
+
+    <!-- Reviews preview -->
+    <section class="reviews" aria-label="Customer reviews">
+      <h4 style="margin:0 0 8px 0;font-family:'Playfair Display',serif">Customer love</h4>
+      <p class="muted">Real reviews from customers — inclusive & authentic</p>
+      <div id="reviews" style="margin-top:10px;display:flex;flex-direction:column;gap:8px"></div>
+    </section>
+  </main>
+
+  <!-- Cart Drawer -->
+  <div id="cartDrawer" class="drawer" role="region" aria-label="Shopping cart" style="display:none">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <strong>Your cart</strong>
+      <button onclick="toggleCart(false)" aria-label="Close cart" style="background:transparent;border:none;cursor:pointer">Close</button>
+    </div>
+    <div id="cartItems" class="cart-list"></div>
+    <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center">
+      <div class="muted">Subtotal</div>
+      <div style="font-weight:800;color:var(--red)"><span id="subtotal">0.00</span> <small id="currencyLabel">USD</small></div>
+    </div>
+    <div style="margin-top:12px;display:flex;gap:8px">
+      <button class="btn btn-primary" onclick="checkout()" style="flex:1">Checkout — Pay</button>
+      <button class="small" onclick="alert('PayPal placeholder — integrate PayPal/Stripe')">PayPal</button>
+    </div>
+  </div>
+
+  <!-- Quick View Modal -->
+  <div id="quickModal" style="display:none" class="modal-backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="Product quick view">
+      <div class="modal-grid" style="padding:14px">
+        <div id="modalImg" style="min-height:260px"></div>
+        <div>
+          <h3 id="modalTitle" style="margin:0;font-family:'Playfair Display',serif"></h3>
+          <div id="modalMeta" class="muted" style="margin-top:8px"></div>
+          <div id="modalRating" style="margin-top:8px"></div>
+          <p id="modalDesc" style="margin-top:12px;color:#444"></p>
+
+          <div style="margin-top:14px;display:flex;gap:8px;align-items:center">
+            <div id="modalPrice" style="font-weight:800;color:var(--red);font-size:18px"></div>
+            <button id="modalAdd" class="btn btn-primary" style="margin-left:auto">Add to cart</button>
+          </div>
+
+          <div style="margin-top:12px">
+            <h4 style="margin:0 0 8px 0">Reviews</h4>
+            <div id="modalReviews"></div>
+            <div style="margin-top:8px">
+              <div style="font-size:13px;color:#666;margin-bottom:6px">Write a review</div>
+              <div style="display:flex;gap:8px;align-items:center;margin-bottom:6px">
+                <div id="starButtons" class="stars" aria-hidden="true">
+                  <button class="small" data-star="1">☆</button>
+                  <button class="small" data-star="2">☆</button>
+                  <button class="small" data-star="3">☆</button>
+                  <button class="small" data-star="4">☆</button>
+                  <button class="small" data-star="5">☆</button>
+                </div>
+                <div id="chosen" class="muted">0</div>
+              </div>
+              <input id="reviewer" placeholder="Your name (optional)" style="width:100%;padding:8px;border-radius:8px;border:1px solid #eee;margin-bottom:8px" />
+              <textarea id="reviewText" placeholder="Share your experience..." style="width:100%;min-height:70px;border-radius:8px;border:1px solid #eee;padding:8px"></textarea>
+              <div style="display:flex;gap:8px;margin-top:8px">
+                <button class="btn btn-primary" onclick="submitReview()">Submit review</button>
+                <button class="small" onclick="closeModal()">Cancel</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chatbot -->
+  <button id="chatBtn" class="chat" aria-haspopup="true" aria-expanded="false">Chat 💬</button>
+  <div id="chatWin" class="chat-window" style="display:none">
+    <div class="chat-header">Hana Chat — Ask about shades & shipping</div>
+    <div id="chatBody" class="chat-body"><div style="font-size:13px;color:#444">Hi! 👋 Ask about products, shades, or delivery.</div></div>
+    <div class="chat-input">
+      <input id="chatInput" placeholder="Type a question..." style="flex:1;padding:8px;border-radius:8px;border:1px solid #eee" />
+      <button class="btn btn-primary" onclick="sendChat()">Send</button>
+    </div>
+  </div>
+
+  <footer class="wrap">
+    <div style="margin-bottom:8px">© <span id="year"></span> Hana Beauty — Inclusive beauty for all</div>
+    <div style="font-size:13px;color:#7b5b6b">Team: Amina • Halfi • Amrita • Nanda</div>
+  </footer>
+
+  <script>
+  /* -------------------------
+     Products (inclusive)
+  ------------------------- */
+  const PRODUCTS = [
+    { id:'sun', name:'Radiant Shield Sunscreen SPF 50', category:'skincare', priceUSD:16.00, image:'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=800&q=60', rating:4.6, description:'Light, non-greasy daily protection for all skin tones.' },
+    { id:'moist', name:'HydraGlow Moisturizer', category:'skincare', priceUSD:22.00, image:'https://images.unsplash.com/photo-1544739313-7c3f0fe9d4c5?auto=format&fit=crop&w=800&q=60', rating:4.8, description:'Deep hydration, fragrance-free option.' },
+    { id:'lipb', name:'Sheer Care Lipbalm', category:'skincare', priceUSD:6.50, image:'https://images.unsplash.com/photo-1506152983158-6f3a3b8ba8d8?auto=format&fit=crop&w=800&q=60', rating:4.5, description:'Nourishing balm—tinted & clear.' },
+    { id:'toner', name:'Calm Balance Toner', category:'skincare', priceUSD:12.00, image:'https://images.unsplash.com/photo-1541534401786-0a6f10fa8fc4?auto=format&fit=crop&w=800&q=60', rating:4.3, description:'Balances pH and soothes skin.' },
+    { id:'serum', name:'Renewal Vitamin C Serum', category:'skincare', priceUSD:28.00, image:'https://images.unsplash.com/photo-1573497019416-7a2f7b38b8f9?auto=format&fit=crop&w=800&q=60', rating:4.7, description:'Brightening serum for even tone.' },
+
+    { id:'found', name:'Silk Glow Foundation', category:'makeup', priceUSD:26.00, image:'https://images.unsplash.com/photo-1511988617509-a57c8a288659?auto=format&fit=crop&w=800&q=60', rating:4.6, description:'Buildable coverage; wide shade range.' },
+    { id:'conc', name:'SoftCover Concealer', category:'makeup', priceUSD:14.00, image:'https://images.unsplash.com/photo-1533777324565-a040eb52fac2?auto=format&fit=crop&w=800&q=60', rating:4.5, description:'Hydrating concealer to brighten.' },
+    { id:'lip', name:'Velvet Matte Lipstick', category:'makeup', priceUSD:18.00, image:'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=60', rating:4.4, description:'Long-lasting matte, comfortable wear.' },
+    { id:'liner', name:'Precision Lipliner', category:'makeup', priceUSD:8.00, image:'https://images.unsplash.com/photo-1543168252-70c3b57b0b3a?auto=format&fit=crop&w=800&q=60', rating:4.2, description:'Fine tip for crisp definition.' },
+    { id:'eye', name:'Defined Eyeliner Pencil', category:'makeup', priceUSD:10.00, image:'https://images.unsplash.com/photo-1562158077-7c0b4f87a5f0?auto=format&fit=crop&w=800&q=60', rating:4.3, description:'Smooth glide, long wear.' },
+    { id:'blush', name:'Petal Flush Blush', category:'makeup', priceUSD:13.00, image:'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=60', rating:4.5, description:'Blendable powder blush for fresh color.' }
+  ];
+
+  /* FX demo rates (replace with live API in production) */
+  const FX = {
+    base:'USD',
+    rates:{ USD:1, INR:82.00, EUR:0.92, GBP:0.78, AUD:1.55, CAD:1.35, JPY:156.0 },
+    list:['USD','INR','EUR','GBP','AUD','CAD','JPY']
+  };
+
+  /* State: cart and reviews stored in localStorage (demo) */
+  let CART = JSON.parse(localStorage.getItem('hana_cart')||'{}');
+  let REVIEWS = JSON.parse(localStorage.getItem('hana_reviews')||'{}');
+
+  const $ = id => document.getElementById(id);
+
+  /* Currency select */
+  (function initCurrency(){
+    const sel = $('currency');
+    FX.list.forEach(c=>{
+      const o = document.createElement('option'); o.value=c; o.textContent=c; sel.appendChild(o);
+    });
+    sel.value = localStorage.getItem('hana_currency') || 'USD';
+    sel.addEventListener('change', ()=>{ localStorage.setItem('hana_currency', sel.value); renderProducts(currentProducts); updateCartUI(); });
+  })();
+
+  /* Render grid */
+  const grid = $('grid');
+  let currentProducts = PRODUCTS.slice();
+  function renderProducts(list){
+    grid.innerHTML = '';
+    list.forEach(p=>{
+      const card = document.createElement('article'); card.className='card';
+      card.setAttribute('role','listitem');
+      card.innerHTML = `
+        <img src="${p.image}" alt="${p.name}" loading="lazy">
+        <div class="title">${p.name}</div>
+        <div class="meta">${p.category} • <span class="muted">${p.rating.toFixed(1)} ★</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
+          <div class="price"><span data-usd="${p.priceUSD}"></span></div>
+          <div class="actions">
+            <button class="small" onclick="openQuick('${p.id}')">Quick view</button>
+            <button class="btn btn-primary" onclick="addToCart('${p.id}')">Add</button>
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+    $('productCount').textContent = list.length;
+    updatePriceDisplays();
+  }
+
+  function currencySymbol(code){
+    return ({USD:'$',INR:'₹',EUR:'€',GBP:'£',AUD:'A$',CAD:'CA$',JPY:'¥'})[code]||code+' ';
+  }
+  function convert(usd,code){ const r = FX.rates[code]||1; return usd * r; }
+  function formatMoney(n){ return Number(n).toFixed(2); }
+
+  /* Update visible prices */
+  function updatePriceDisplays(){
+    const cur = $('currency').value;
+    document.querySelectorAll('[data-usd]').forEach(el=>{
+      const usd = parseFloat(el.getAttribute('data-usd'));
+      el.textContent = currencySymbol(cur) + formatMoney(convert(usd,cur));
+    });
+  }
+
+  /* Filters */
+  function applyFilters(){
+    const q = $('search').value.trim().toLowerCase();
+    const cat = $('category').value;
+    currentProducts = PRODUCTS.filter(p=>{
+      if(cat !== 'all' && p.category !== cat) return false;
+      if(!q) return true;
+      return p.name.toLowerCase().includes(q) || p.description.toLowerCase().includes(q);
+    });
+    renderProducts(currentProducts);
+  }
+  function scrollToProducts(){ $('products').scrollIntoView({behavior:'smooth'}); }
+
+  /* CART */
+  function saveCart(){ localStorage.setItem('hana_cart', JSON.stringify(CART)); }
+  function addToCart(id){
+    CART[id] = (CART[id]||0) + 1; saveCart(); updateCartCount(); updateCartUI(); toggleCart(true);
+  }
+  function changeQty(id,delta){
+    CART[id] = (CART[id]||0) + delta; if(CART[id] <= 0) delete CART[id]; saveCart(); updateCartCount(); updateCartUI();
+  }
+  function removeItem(id){ delete CART[id]; saveCart(); updateCartCount(); updateCartUI(); }
+  function updateCartCount(){ $('cartCount').textContent = Object.values(CART).reduce((s,n)=>s+n,0); }
+
+  function calcSubtotal(){
+    const cur = $('currency').value; return Object.entries(CART).reduce((sum,[pid,qty])=>{
+      const p = PRODUCTS.find(x=>x.id===pid); return sum + (p ? convert(p.priceUSD,cur)*qty : 0);
+    },0);
+  }
+
+  function updateCartUI(){
+    const wrap = $('cartItems'); wrap.innerHTML = '';
+    const keys = Object.keys(CART);
+    if(keys.length === 0) wrap.innerHTML = '<div class="muted">Your cart is empty.</div>';
+    else keys.forEach(pid=>{
+      const p = PRODUCTS.find(x=>x.id===pid); if(!p) return;
+      const qty = CART[pid]; const cur = $('currency').value;
+      const node = document.createElement('div'); node.className='cart-item';
+      node.innerHTML = `
+        <img src="${p.image}" alt="${p.name}" />
+        <div style="flex:1">
+          <div style="font-weight:700">${p.name}</div>
+          <div class="muted" style="font-size:13px">${currencySymbol(cur)}${formatMoney(convert(p.priceUSD,cur))} • ${p.category}</div>
+          <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
+            <div class="qty-controls">
+              <button class="small" onclick="changeQty('${pid}',-1)">-</button>
+              <span style="padding:0 8px">${qty}</span>
+              <button class="small" onclick="changeQty('${pid}',1)">+</button>
+            </div>
+            <button class="small" onclick="removeItem('${pid}')">Remove</button>
+          </div>
+        </div>
+      `;
+      wrap.appendChild(node);
+    });
+    $('subtotal').textContent = formatMoney(calcSubtotal());
+    $('currencyLabel').textContent = $('currency').value;
+  }
+
+  function toggleCart(show){
+    const d = $('cartDrawer');
+    if(typeof show==='undefined') show = d.style.display==='none';
+    d.style.display = show ? 'block' : 'none';
+    $('openCartBtn').setAttribute('aria-expanded', String(show));
+    updateCartUI();
+  }
+  $('openCartBtn').addEventListener('click', ()=> toggleCart(true));
+
+  function checkout(){
+    if(Object.keys(CART).length === 0) return alert('Your cart is empty.');
+    alert('Checkout placeholder — integrate Stripe or PayPal on your backend.');
+  }
+
+  /* Quick view + reviews */
+  let currentModalProduct = null;
+  function openQuick(id){
+    const p = PRODUCTS.find(x=>x.id===id); if(!p) return;
+    currentModalProduct = p;
+    $('modalImg').innerHTML = `<img src="${p.image}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;border-radius:8px" />`;
+    $('modalTitle').textContent = p.name;
+    $('modalMeta').textContent = p.category + ' • ' + p.description;
+    const cur = $('currency').value; $('modalPrice').textContent = currencySymbol(cur) + formatMoney(convert(p.priceUSD,cur));
+    $('modalAdd').onclick = ()=>{ addToCart(p.id); closeModal(); };
+    renderModalReviews();
+    chosenStar = 0; updateChosen();
+    $('reviewer').value=''; $('reviewText').value='';
+    $('quickModal').style.display='flex'; $('quickModal').setAttribute('aria-hidden','false');
+  }
+
+  function closeModal(){ $('quickModal').style.display='none'; $('quickModal').setAttribute('aria-hidden','true'); currentModalProduct=null; }
+
+  function renderModalReviews(){
+    const wrap = $('modalReviews'); wrap.innerHTML = '';
+    const pid = currentModalProduct.id; const list = REVIEWS[pid]||[];
+    if(list.length === 0) wrap.innerHTML = '<div class="muted">No reviews yet — be the first!</div>';
+    else list.slice(0,6).forEach(r=>{
+      const d = document.createElement('div'); d.className='review-box';
+      d.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center"><strong>${escapeHtml(r.name||'Customer')}</strong><div class="stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div></div><div style="color:#444;margin-top:6px">${escapeHtml(r.text)}</div><div style="font-size:11px;color:#999;margin-top:6px">${new Date(r.ts).toLocaleString()}</div>`;
+      wrap.appendChild(d);
+    });
+  }
+
+  function submitReview(){
+    if(!currentModalProduct) return alert('Open a product to review.');
+    const name = $('reviewer').value.trim() || 'Anonymous';
+    const text = $('reviewText').value.trim(); if(!text) return alert('Please write a short review.');
+    const pid = currentModalProduct.id; const arr = REVIEWS[pid]||[];
+    arr.unshift({ name, text, stars: chosenStar || 5, ts: Date.now() }); REVIEWS[pid] = arr;
+    localStorage.setItem('hana_reviews', JSON.stringify(REVIEWS));
+    renderModalReviews(); renderReviewsSection(); alert('Thanks — review saved (demo only).');
+    $('reviewer').value=''; $('reviewText').value=''; chosenStar=0; updateChosen();
+  }
+
+  /* Stars in modal */
+  let chosenStar = 0;
+  document.addEventListener('click', function(e){
+    if(e.target.matches('#starButtons button')){ chosenStar = parseInt(e.target.dataset.star,10); updateChosen(); }
+  });
+  function updateChosen(){ document.querySelectorAll('#starButtons button').forEach(btn=>{ const n=parseInt(btn.dataset.star,10); btn.textContent = n<=chosenStar ? '★' : '☆'; }); $('chosen').textContent = chosenStar ? (chosenStar + ' stars') : '0'; }
+
+  /* Reviews preview */
+  function renderReviewsSection(){
+    const wrap = $('reviews'); wrap.innerHTML = '';
+    const all = Object.entries(REVIEWS).flatMap(([pid,arr]) => arr.map(r=> ({...r, product: PRODUCTS.find(p=>p.id===pid)?.name||''})));
+    if(all.length === 0) { wrap.innerHTML = '<div class="muted">No reviews yet — be the first to share your glow.</div>'; return; }
+    all.slice(0,6).forEach(r=>{
+      const node = document.createElement('div'); node.className='review-box';
+      node.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center"><div style="font-weight:700">${escapeHtml(r.name)}</div><div class="muted">${'★'.repeat(r.stars)}</div></div><div style="color:#444;margin-top:6px">${escapeHtml(r.text)}<div style="font-size:12px;color:#777;margin-top:6px">${r.product}</div></div>`;
+      wrap.appendChild(node);
+    });
+  }
+
+  /* Chatbot stub */
+  $('chatBtn').addEventListener('click', ()=> { const w=$('chatWin'); w.style.display = w.style.display==='none'?'block':'none'; });
+  function sendChat(){ const txt=$('chatInput').value.trim(); if(!txt) return; const body=$('chatBody'); const user=document.createElement('div'); user.style.textAlign='right'; user.style.marginBottom='8px'; user.innerHTML=`<div style="display:inline-block;background:#FFEAF5;padding:8px;border-radius:8px;">${escapeHtml(txt)}</div>`; body.appendChild(user); $('chatInput').value=''; setTimeout(()=>{ const r=document.createElement('div'); r.style.marginBottom='8px'; r.innerHTML=`<div style="display:inline-block;background:#f6f0ff;padding:8px;border-radius:8px;">Thanks — our team will reply soon. Try: "Which shade suits medium-olive skin?"</div>`; body.appendChild(r); body.scrollTop = body.scrollHeight; },700); }
+
+  /* Utilities */
+  function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  /* Init */
+  (function init(){
+    renderProducts(PRODUCTS); renderReviewsSection(); updateCartCount(); updateCartUI(); $('year').textContent = new Date().getFullYear();
+    // Update price displays when currency changes
+    document.getElementById('currency').addEventListener('change', updatePriceDisplays);
+    // Optional: fetch live FX (uncomment & secure in production)
+    // fetch('https://api.exchangerate.host/latest?base=USD').then(r=>r.json()).then(data=>{ FX.rates = Object.assign(FX.rates, data.rates); updatePriceDisplays(); updateCartUI(); });
+  })();
+
+  // Close modal/drawer with Escape
+  document.addEventListener('keydown', (ev)=>{ if(ev.key==='Escape'){ if($('quickModal').style.display==='flex') closeModal(); if($('cartDrawer').style.display==='block') toggleCart(false); } });
+
+  // Click backdrop to close modal
+  document.getElementById('quickModal').addEventListener('click', (e)=>{ if(e.target===document.getElementById('quickModal')) closeModal(); });
+  </script>
+</body>
+</html>
